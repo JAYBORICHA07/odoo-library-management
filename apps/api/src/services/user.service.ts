@@ -13,3 +13,15 @@ export const addNewUser = async (
   const newUser = await db.user.selectAll().create(userDetails);
   return newUser;
 };
+
+export const addLibrarian = async (
+  userDetails: Omit<User, "id" | "createdAt" | "updatedAt">
+): Promise<User> => {
+  const newUser = await db.user.selectAll().create({
+    email: userDetails.email,
+    name: userDetails.name,
+    password: userDetails.password,
+    role: "librarian",
+  });
+  return newUser;
+};
