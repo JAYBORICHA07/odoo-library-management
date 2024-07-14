@@ -173,6 +173,28 @@ export const RouteObjectWithNavbar: RouteObjectWithNavbar[] = [
       },
     ],
   },
+  {
+    path: "/books",
+    element: <PageWrapper component={<DashboardLayout />} />,
+    errorElement: <ErrorPage />,
+    showInNav: true,
+    children: [
+      {
+        caseSensitive: false,
+        index: true,
+        lazy: async () => {
+          const { Books } = await import("../pages/books/Books.page");
+          return { element: <PageWrapper component={<Books />} /> };
+        },
+        icon: "ph:chart-pie-slice-duotone",
+        navPath: "/books",
+        navLabel: "Books",
+        title: "Books",
+        subheader: "Books",
+        showInNav: true,
+      }
+    ]
+  },
 ];
 
 export const router: ReturnType<typeof createBrowserRouter> =
