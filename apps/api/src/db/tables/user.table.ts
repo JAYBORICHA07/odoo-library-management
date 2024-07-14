@@ -1,5 +1,6 @@
 import { Queryable, Selectable, Updatable } from "orchid-orm";
 import { BaseTable } from "./baseTable";
+import { BookBorrowDataTable } from "./bookBorrowData.table";
 
 export class UserTable extends BaseTable {
   readonly table = "user";
@@ -12,6 +13,13 @@ export class UserTable extends BaseTable {
     createdAt: t.createdAt,
     updatedAt: t.updatedAt,
   }));
+
+  relations = {
+    bookBorrowData: this.hasMany(() => BookBorrowDataTable, {
+      columns: ["id"],
+      references: ["userId"],
+    }),
+  };
 }
 export type User = Selectable<UserTable>;
 export type UserUpdate = Updatable<UserTable>;
