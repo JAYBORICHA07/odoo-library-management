@@ -15,7 +15,6 @@ export const AuthSuccess: React.FC = () => {
     refetchOnReconnect: true,
     refetchOnMount: true,
   });
-  console.log(userSession);
   useEffect(() => {
     if (userSession.data) {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -23,7 +22,13 @@ export const AuthSuccess: React.FC = () => {
       setUserToken({ exp: userSession.data.exp, iat: userSession.data.iat });
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
-      setUserInfo(userSession.data.user[0]);
+      const userData = userSession?.data?.user[0]?.id
+        ? // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
+          userSession.data.user[0]
+        : userSession.data.user;
+      setUserInfo(userData);
+
       router.replace("/");
     }
   }, [router, userSession.isLoading]);
