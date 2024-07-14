@@ -30,7 +30,7 @@ export default function TopAuthor() {
   return (
     <Card className="flex-col">
       <header className="self-start">
-        <Typography.Title level={5}>Top Authors</Typography.Title>
+        <Typography.Title level={5}>Top Borrowers</Typography.Title>
       </header>
       <main className="w-full">
         {new Array(3).fill("").map((_, index) => (

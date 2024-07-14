@@ -19,6 +19,11 @@ export const trpcRouter = router({
       return newUser;
     };
   }),
+  getAllUsers: publicProcedure.query(async ({ ctx }) => {
+    const users = await db.user.select();
+    console.log(`fetched ${users} users from db`);
+    return users;
+  }),
   addBooks: bookController.addBook,
   deleteBooks: bookController.deleteBook,
   updateBooks: bookController.updateBook,
@@ -30,6 +35,7 @@ export const trpcRouter = router({
   getBooksByPublishedYear: bookController.getBooksByPublishedYear,
   getBooksByGenre: bookController.getBooksByGenre,
   getBooksByAvailable: bookController.getBooksByAvailable,
+  getBooksBorrowedByUser: bookController.getBooksBorrowedByUser,
 });
 
 // export type definition of API

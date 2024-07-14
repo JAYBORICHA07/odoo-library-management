@@ -132,4 +132,14 @@ export const bookController = router({
       console.log(`updated ${updateBooksInDB} books in db`);
       return `updated ${updateBooksInDB} books in db`;
     }),
+  getBooksBorrowedByUser: publicProcedure.query(async ({ ctx }) => {
+    // @ts-ignore
+    console.log(ctx.user!.user[0].id);
+    const books = await db.bookBorrowDataTable
+      // @ts-ignore
+      .where({ userId: Number(ctx.user!.user[0].id!) })
+      .select();
+    console.log(`fetched ${books} books from db`);
+    return books;
+  }),
 });

@@ -4,7 +4,6 @@ import Color from "color";
 import Character3 from "../../../assets/images/characters/character_3.png";
 import { useUserInfo } from "../../../store/userStore";
 import { useThemeToken } from "../../../theme/hooks";
-import { Iconify } from "../../../components/icon";
 
 export default function BannerCard() {
   const { name } = useUserInfo();
@@ -38,16 +37,16 @@ export default function BannerCard() {
           style={{ color: themeToken.colorPrimaryTextActive }}
           className="mx-auto mb-6 mt-4 max-w-sm text-sm opacity-80 md:mx-0"
         >
-          Join the Whatsapp channel to get lateset updates
+          Get latest updates on the library management
         </div>
-        <button
+        {/* <button
           className="font-mediumtext-black m-auto flex items-center justify-center rounded-lg px-2 py-1 shadow-none md:m-0"
           style={{ backgroundColor: themeToken.colorPrimary, color: "#fff" }}
           onClick={() => window.open("https://teziapp.com")}
         >
           <Iconify icon="mdi:whatsapp" size={24} />
           <span className="ml-2 font-black">Join Whatsapp</span>
-        </button>
+        </button> */}
       </Col>
 
       <Col

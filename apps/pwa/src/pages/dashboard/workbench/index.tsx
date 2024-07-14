@@ -4,13 +4,14 @@ import AreaDownload from "./area-download";
 import BannerCard from "./banner-card";
 import { Applications, Conversion } from "./conversion_applications";
 import CurrentDownload from "./current-download";
-import NewInvoice from "./new-invoice";
 import TopAuthor from "./top-authors";
-import TopInstalled from "./top-installed";
-import TopRelated from "./top-related";
 import TotalCard from "./total-card";
+import { trpc } from "@/trpc/trpc";
 
 export function Workbench() {
+  const users = trpc.getAllUsers.useQuery();
+  console.log(users.data);
+
   return (
     <div className="p-2">
       <Row gutter={[16, 16]} justify="center">
@@ -32,9 +33,9 @@ export function Workbench() {
       <Row gutter={[16, 16]} className="mt-4" justify="center">
         <Col span={24} md={8}>
           <TotalCard
-            title="Total Active Users"
+            title="Total Users"
             increase
-            count="18,765"
+            count={users.data!.length.toString()}
             percent="2.6%"
             chartData={[22, 8, 35, 50, 82, 84, 77, 12, 87, 43]}
           />
@@ -42,9 +43,9 @@ export function Workbench() {
 
         <Col span={24} md={8}>
           <TotalCard
-            title="Total Installed"
+            title="Total Books Borroed Today"
             increase
-            count="4,876"
+            count="68"
             percent="0.2%"
             chartData={[45, 52, 38, 24, 33, 26, 21, 20, 6]}
           />
@@ -52,9 +53,9 @@ export function Workbench() {
 
         <Col span={24} md={8}>
           <TotalCard
-            title="Total Downloads"
+            title="Total Books Returned Today"
             increase={false}
-            count="678"
+            count="30"
             percent="0.1%"
             chartData={[35, 41, 62, 42, 13, 18, 29, 37, 36]}
           />
@@ -69,22 +70,8 @@ export function Workbench() {
           <AreaDownload />
         </Col>
       </Row>
-
       <Row gutter={[16, 16]} className="mt-4" justify="center">
-        <Col span={24} md={12} lg={16}>
-          <NewInvoice />
-        </Col>
-        <Col span={24} md={12} lg={8}>
-          <TopRelated />
-        </Col>
-      </Row>
-
-      <Row gutter={[16, 16]} className="mt-4" justify="center">
-        <Col span={24} md={12}>
-          <TopInstalled />
-        </Col>
-
-        <Col span={24} md={12}>
+        <Col span={24} md={24}>
           <TopAuthor />
         </Col>
       </Row>
