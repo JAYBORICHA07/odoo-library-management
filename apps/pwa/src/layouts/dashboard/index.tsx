@@ -1,4 +1,4 @@
-import { useScroll } from "framer-motion";
+ import { useScroll } from "framer-motion";
 import { Suspense, useCallback, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import Header from "./header";

@@ -135,7 +135,6 @@ export const RouteObjectWithNavbar: RouteObjectWithNavbar[] = [
       {
         caseSensitive: false,
         index: true,
-        path: "/home",
         lazy: async () => {
           const { Home } = await import("../pages/home/Home.page");
           return { element: <PageWrapper component={<Home />} /> };
@@ -146,6 +145,31 @@ export const RouteObjectWithNavbar: RouteObjectWithNavbar[] = [
         title: "Home",
         subheader: "Home",
         showInNav: true,
+      }
+    ]
+  },
+  {
+    path: "/profile",
+    element: <PageWrapper component={<DashboardLayout />} />,
+    errorElement: <ErrorPage />,
+    showInNav: true,
+    children: [
+      {
+        caseSensitive: false,
+        index: true,
+
+        path: "/profile",
+        lazy: async () => {
+          const { Profile } = await import("../pages/profile/Profile");
+          return { element: <PageWrapper component={<Profile />} /> };
+        },
+        icon: "ph:chart-pie-slice-duotone",
+        navPath: "/profile",
+        navLabel: "profile",
+        title: "profile",
+        subheader: "profile",
+        showInNav: false,
+
       },
     ],
   },

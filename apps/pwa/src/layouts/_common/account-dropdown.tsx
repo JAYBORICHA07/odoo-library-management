@@ -63,7 +63,7 @@ export default function AccountDropdown() {
       key: "0",
     },
     {
-      label: <NavLink to="/management/user/profile">{"Profile"}</NavLink>,
+      label: <NavLink to="/profile">{"Profile"}</NavLink>,
       key: "1",
     },
     {
