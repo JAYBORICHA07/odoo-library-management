@@ -1,4 +1,4 @@
-import { Flex, Form, Input, Typography } from "antd";
+import { DatePicker, Flex, Form, Input, Typography } from "antd";
 
 function BorrowBookModal(data: any) {
   console.log(data);
@@ -17,9 +17,7 @@ function BorrowBookModal(data: any) {
           </Flex>
           <Flex vertical>
             <Typography.Title level={5}>Return date</Typography.Title>
-            <Form.Item rules={[{ required: true }]}>
-              <Input size="large" type="date" className="w-full" />
-            </Form.Item>
+            <DatePicker />
           </Flex>
         </div>
       </Form>
