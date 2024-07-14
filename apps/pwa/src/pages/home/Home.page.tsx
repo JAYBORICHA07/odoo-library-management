@@ -1,9 +1,23 @@
-import { Flex, Input, Select, Tag, Typography } from "antd";
-import React from "react";
+import { Button, Flex, Input, Modal, Select, Tag, Typography } from "antd";
+import React, { useState } from "react";
 import Card from "@/components/card";
 import { trpc } from "@/trpc/trpc";
+import BorrowBookModal from "../../components/borrow_book_modal/borrow";
 
 export const Home: React.FC = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
   const allBooks = trpc.getAllBooks.useQuery();
   const data = allBooks.data;
   console.log(data);
@@ -99,6 +113,12 @@ export const Home: React.FC = () => {
              >
                success
              </Tag>{" "}
+             <Button type="primary" onClick={showModal}>
+        Open Modal
+      </Button>
+      <Modal title="Basic Modal" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+        <BorrowBookModal />
+      </Modal>
            </div>
          </div>
         ))}
