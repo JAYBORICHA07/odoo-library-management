@@ -35,7 +35,7 @@ export function Workbench() {
           <TotalCard
             title="Total Users"
             increase
-            count={users.data!.length.toString()}
+            count={users?.data?.length.toString() ?? "7"}
             percent="2.6%"
             chartData={[22, 8, 35, 50, 82, 84, 77, 12, 87, 43]}
           />
