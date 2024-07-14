@@ -2,12 +2,11 @@ import React, { useEffect } from "react";
 import { Button, Result } from "antd";
 import { CircleLoading } from "../../../components/loading";
 import { trpc } from "../../../trpc/trpc";
-import { useUserActions, useUserToken } from "../../../store/userStore";
+import { useUserActions } from "../../../store/userStore";
 import { useRouter } from "../../../router/hooks";
 
 export const AuthSuccess: React.FC = () => {
   const router = useRouter();
-  const { exp } = useUserToken();
   const { setUserInfo, setUserToken } = useUserActions();
   const userSession = trpc.user.useQuery(undefined, {
     retry: 2,
@@ -16,16 +15,15 @@ export const AuthSuccess: React.FC = () => {
     refetchOnReconnect: true,
     refetchOnMount: true,
   });
+  console.log(userSession);
   useEffect(() => {
-    if (exp) {
-      router.replace("/");
-    } else if (userSession.data) {
+    if (userSession.data) {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       setUserToken({ exp: userSession.data.exp, iat: userSession.data.iat });
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
-      setUserInfo(userSession.data.user);
+      setUserInfo(userSession.data.user[0]);
       router.replace("/");
     }
   }, [router, userSession.isLoading]);
