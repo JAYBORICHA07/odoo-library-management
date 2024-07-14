@@ -4,10 +4,8 @@ import { Navigate } from "react-router-dom";
 import DashboardImg from "../../../assets/images/background/dashboard.png";
 import Overlay2 from "../../../assets/images/background/overlay_2.jpg";
 import { useThemeToken } from "../../../theme/hooks";
-import LoginForm from "./LoginForm";
 import { LoginStateProvider } from "./providers/LoginStateProvider";
 import RegisterForm from "./RegisterForm";
-import ResetForm from "./ResetForm";
 import { Logo } from "../../../components/Logo/Logo";
 import { useUserInfo } from "../../../store/userStore";
 
@@ -33,7 +31,7 @@ export function Register() {
         <Flex gap={"small"} align="center">
           <Logo className="h-14 w-14" />
           <div className="text-3xl font-bold leading-normal lg:text-4xl xl:text-5xl">
-            Your app title
+            BookIt
           </div>
         </Flex>
         <img
