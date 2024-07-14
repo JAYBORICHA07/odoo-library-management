@@ -1,6 +1,8 @@
 import { orchidORM } from "orchid-orm";
 import { env } from "../configs/env.config";
 import { UserTable } from "./tables/user.table";
+import { BookTable } from "./tables/book.table";
+import { BookBorrowDataTable } from "./tables/bookBorrowData.table";
 
 export const db = orchidORM(
   {
@@ -11,5 +13,7 @@ export const db = orchidORM(
   },
   {
     user: UserTable,
+    books: BookTable,
+    bookBorrowDataTable: BookBorrowDataTable,
   }
 );

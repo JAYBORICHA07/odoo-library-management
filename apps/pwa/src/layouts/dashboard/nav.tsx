@@ -105,7 +105,7 @@ export default function Nav(props: Props) {
                 className="ml-2 text-xl font-bold"
                 style={{ color: colorPrimary }}
               >
-                Your app title
+                BookIt
               </span>
             </m.div>
           )}
