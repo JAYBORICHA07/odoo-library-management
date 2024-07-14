@@ -1,7 +1,7 @@
 import { Flex, Layout } from "antd";
 import Color from "color";
 import { Navigate } from "react-router-dom";
-import DashboardImg from "../../../assets/images/background/dashboard.png";
+import DashboardImg from "../../../assets/images/background/Saly-10.svg";
 import Overlay2 from "../../../assets/images/background/overlay_2.jpg";
 import { useThemeToken } from "../../../theme/hooks";
 import LoginForm from "./LoginForm";
