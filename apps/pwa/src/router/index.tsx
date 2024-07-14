@@ -124,6 +124,29 @@ export const RouteObjectWithNavbar: RouteObjectWithNavbar[] = [
     children: [],
     showInNav: false,
   },
+  {
+    path: "/profile",
+    element: <PageWrapper component={<DashboardLayout />} />,
+    errorElement: <ErrorPage />,
+    showInNav: true,
+    children: [
+      {
+        caseSensitive: false,
+        index: true,
+        path: "/profile",
+        lazy: async () => {
+          const { Profile } = await import("../pages/profile/Profile");
+          return { element: <PageWrapper component={<Profile />} /> };
+        },
+        icon: "ph:chart-pie-slice-duotone",
+        navPath: "/profile",
+        navLabel: "profile",
+        title: "profile",
+        subheader: "profile",
+        showInNav: false,
+      },
+    ],
+  },
 ];
 
 export const router: ReturnType<typeof createBrowserRouter> =
