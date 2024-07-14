@@ -10,7 +10,6 @@ import { uptime } from "process";
 
 export const bookController = router({
   getAllBooks: publicProcedure
-    .input(z.object({ id: z.number() }))
     .query(async ({ input, ctx }) => {
       const books = await db.books.select();
       console.log(`fetched ${books} books from db`);

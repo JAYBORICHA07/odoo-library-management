@@ -10,6 +10,7 @@ import { ErrorPage } from "../pages/Error.page";
 import DashboardLayout from "../layouts/dashboard";
 import Page404 from "../pages/Error/Page404";
 
+
 type PageProps = {
   component: ReactNode;
 };
@@ -116,6 +117,7 @@ export const RouteObjectWithNavbar: RouteObjectWithNavbar[] = [
         subheader: "Auth Redirect",
         showInNav: false,
       },
+
     ],
   },
   {
@@ -123,6 +125,28 @@ export const RouteObjectWithNavbar: RouteObjectWithNavbar[] = [
     element: <Page404 />,
     children: [],
     showInNav: false,
+  },
+  {
+    path: "/home",
+    element: <PageWrapper component={<DashboardLayout />} />,
+    errorElement: <ErrorPage />,
+    showInNav: true,
+    children: [
+      {
+        caseSensitive: false,
+        index: true,
+        lazy: async () => {
+          const { Home } = await import("../pages/home/Home.page");
+          return { element: <PageWrapper component={<Home />} /> };
+        },
+        icon: "ph:chart-pie-slice-duotone",
+        navPath: "/home",
+        navLabel: "Home",
+        title: "Home",
+        subheader: "Home",
+        showInNav: true,
+      }
+    ]
   },
   {
     path: "/profile",
@@ -133,6 +157,7 @@ export const RouteObjectWithNavbar: RouteObjectWithNavbar[] = [
       {
         caseSensitive: false,
         index: true,
+
         path: "/profile",
         lazy: async () => {
           const { Profile } = await import("../pages/profile/Profile");
@@ -144,8 +169,31 @@ export const RouteObjectWithNavbar: RouteObjectWithNavbar[] = [
         title: "profile",
         subheader: "profile",
         showInNav: false,
+
       },
     ],
+  },
+  {
+    path: "/books",
+    element: <PageWrapper component={<DashboardLayout />} />,
+    errorElement: <ErrorPage />,
+    showInNav: true,
+    children: [
+      {
+        caseSensitive: false,
+        index: true,
+        lazy: async () => {
+          const { Books } = await import("../pages/books/Books.page");
+          return { element: <PageWrapper component={<Books />} /> };
+        },
+        icon: "ph:chart-pie-slice-duotone",
+        navPath: "/books",
+        navLabel: "Books",
+        title: "Books",
+        subheader: "Books",
+        showInNav: true,
+      }
+    ]
   },
 ];
 
