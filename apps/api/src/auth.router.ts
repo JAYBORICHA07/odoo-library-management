@@ -42,7 +42,8 @@ export const authRouter = (
     async (req: FastifyRequest, reply: FastifyReply) => {
       try {
         console.log("login");
-        const userInfo: Omit<User, "id"> = req.body as Omit<User, "id">;
+        const userInfo: Omit<User, "id" | "createdAt" | "updatedAt"> =
+          req.body as Omit<User, "id">;
 
         console.log("userInfo", userInfo);
 
@@ -51,6 +52,10 @@ export const authRouter = (
         }
 
         let user = await getUserByEmail(userInfo.email);
+
+        if (user[0]?.id) {
+          throw new Error("User already exists");
+        }
 
         if (!user[0]?.id) {
           user = await addNewUser({
@@ -71,7 +76,10 @@ export const authRouter = (
           domain: new URL(env.FRONTEND_URL as string).hostname,
         });
 
-        reply.redirect(`${env.FRONTEND_URL}/auth/success`);
+        reply.code(200).send({
+          success: true,
+          redirectUrl: `${env.FRONTEND_URL}/auth/success`,
+        });
       } catch (error) {
         req.log.error(error);
         reply.redirect("/auth/login/failed");
@@ -94,11 +102,11 @@ export const authRouter = (
       }
 
       let user = await getUserByEmail(userInfo.email);
-      console.log("user found !!!", user);
 
       if (!user[0]?.id) {
         throw new Error("User not found, please register");
       }
+      console.log("user found !!!", user);
       const jwtToken = fastify.jwt.sign({ user }, { expiresIn: "7d" });
 
       reply.setCookie("session", jwtToken, {
@@ -108,8 +116,11 @@ export const authRouter = (
         path: "/",
         domain: new URL(env.FRONTEND_URL as string).hostname,
       });
-
-      reply.redirect(`${env.FRONTEND_URL}/auth/success`);
+      console.log("cookie set");
+      reply.code(200).send({
+        success: true,
+        redirectUrl: `${env.FRONTEND_URL}/auth/success`,
+      });
     } catch (error) {
       req.log.error(error);
       reply.redirect("/auth/login/failed");
