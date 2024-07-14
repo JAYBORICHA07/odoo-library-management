@@ -10,6 +10,7 @@ import { ErrorPage } from "../pages/Error.page";
 import DashboardLayout from "../layouts/dashboard";
 import Page404 from "../pages/Error/Page404";
 
+
 type PageProps = {
   component: ReactNode;
 };
@@ -116,6 +117,7 @@ export const RouteObjectWithNavbar: RouteObjectWithNavbar[] = [
         subheader: "Auth Redirect",
         showInNav: false,
       },
+
     ],
   },
   {
@@ -123,6 +125,29 @@ export const RouteObjectWithNavbar: RouteObjectWithNavbar[] = [
     element: <Page404 />,
     children: [],
     showInNav: false,
+  },
+  {
+    path: "/home",
+    element: <PageWrapper component={<DashboardLayout />} />,
+    errorElement: <ErrorPage />,
+    showInNav: true,
+    children: [
+      {
+        caseSensitive: false,
+        index: true,
+        path: "/home",
+        lazy: async () => {
+          const { Home } = await import("../pages/home/Home.page");
+          return { element: <PageWrapper component={<Home />} /> };
+        },
+        icon: "ph:chart-pie-slice-duotone",
+        navPath: "/home",
+        navLabel: "Home",
+        title: "Home",
+        subheader: "Home",
+        showInNav: true,
+      },
+    ],
   },
 ];
 
