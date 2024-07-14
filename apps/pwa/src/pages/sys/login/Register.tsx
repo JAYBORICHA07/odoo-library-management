@@ -6,11 +6,12 @@ import Overlay2 from "../../../assets/images/background/overlay_2.jpg";
 import { useThemeToken } from "../../../theme/hooks";
 import LoginForm from "./LoginForm";
 import { LoginStateProvider } from "./providers/LoginStateProvider";
-
+import RegisterForm from "./RegisterForm";
+import ResetForm from "./ResetForm";
 import { Logo } from "../../../components/Logo/Logo";
 import { useUserInfo } from "../../../store/userStore";
 
-export function Login() {
+export function Register() {
   const token = useUserInfo();
   const { colorBgElevated } = useThemeToken();
 
@@ -44,7 +45,7 @@ export function Login() {
 
       <div className="m-auto flex !h-screen w-full max-w-[480px] flex-col justify-center px-[16px] lg:px-[64px]">
         <LoginStateProvider>
-          <LoginForm />
+          <RegisterForm />
         </LoginStateProvider>
       </div>
     </Layout>
