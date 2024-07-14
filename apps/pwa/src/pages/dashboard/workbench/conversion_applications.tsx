@@ -8,7 +8,7 @@ export function Conversion() {
     <Basic
       percent={48}
       title="38,566"
-      subtitle="Conversion"
+      subtitle="Total Book Borrowed"
       iconify="tabler:user-filled"
       bg={colorPrimaryActive}
       strokeColor={colorPrimaryBorder}
@@ -21,7 +21,7 @@ export function Applications() {
     <Basic
       percent={75}
       title="45,566"
-      subtitle="Applications"
+      subtitle="Book Returned"
       iconify="ic:round-email"
       bg={colorInfoActive}
       strokeColor={colorInfoBorder}
